@@ -9,6 +9,7 @@ import "./styles.scss";
 
 const App = () => {
   const [coinData, setCoinData] = useState([]);
+  const [strokeColor, setStrokeColor] = useState('#8884d8');
 
   useEffect(() => {
     axios
@@ -20,8 +21,8 @@ const App = () => {
   }, []);
   return (
     <div className="App">
-      <Navbar />
-      <Charts coinData={coinData} />
+      <Navbar strokeColor={strokeColor} setStrokeColor={setStrokeColor}/>
+      <Charts coinData={coinData} strokeColor={strokeColor}/>
     </div>
   );
 };

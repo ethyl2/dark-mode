@@ -1,7 +1,7 @@
 import React from "react";
 import Chart from "./Chart";
 
-const Charts = ({ coinData }) => {
+const Charts = ({ coinData, strokeColor }) => {
   return (
     <div className="charts">
       {coinData.map(coin => (
@@ -11,7 +11,7 @@ const Charts = ({ coinData }) => {
           <div className="coin__logo">
             <img src={coin.image} height="40" alt={coin.name} />
           </div>
-          <Chart sparklineData={coin.sparkline_in_7d.price} />
+          <Chart sparklineData={coin.sparkline_in_7d.price} strokeColor={strokeColor} />
         </div>
       ))}
     </div>

@@ -1,11 +1,12 @@
 import React from 'react';
 import useDarkMode from '../hooks/useDarkMode';
 
-const Navbar = () => {
+const Navbar = ( props ) => {
   const [darkMode, setDarkMode] = useDarkMode(false);
   const toggleMode = e => {
     e.preventDefault();
     setDarkMode(!darkMode);
+    darkMode? props.setStrokeColor('#8884d8') : props.setStrokeColor('#F7931A');
   };
   return (
     <nav className="navbar">
