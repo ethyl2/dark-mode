@@ -10,6 +10,7 @@ import {
 } from "recharts";
 
 const Chart = ({ sparklineData, strokeColor }) => {
+  
   const formattedData = sparklineData
     .map((price, idx) => {
       if (idx % 6 === 0) {
@@ -30,7 +31,7 @@ const Chart = ({ sparklineData, strokeColor }) => {
 
   return (
     <LineChart width={1100} height={300} data={formattedData}>
-      <Line type="monotone" dataKey="value" stroke={strokeColor} strokeWidth='3'/>
+      <Line type="monotone" dataKey="value" stroke={strokeColor} strokeWidth='3' />
       <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
       <XAxis dataKey="date" interval={3} />
       <YAxis />
