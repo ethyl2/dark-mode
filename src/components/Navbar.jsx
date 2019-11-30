@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import useDarkMode from '../hooks/useDarkMode';
 
 const Navbar = ( props ) => {
@@ -11,6 +12,8 @@ const Navbar = ( props ) => {
   return (
     <nav className="navbar">
       <h1>Crypto Tracker</h1>
+      <NavLink exact to='/'>All Coins</NavLink>
+      <NavLink to='/coins'>More Coin Info</NavLink>
       <div className="dark-mode__toggle">
         <div
           onClick={toggleMode}

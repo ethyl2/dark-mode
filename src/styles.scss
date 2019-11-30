@@ -157,6 +157,19 @@ img {
   width: 100%;
 }
 
+a {
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+a:hover {
+  font-style: italic;
+}
+
+a.active {
+  font-weight: bold;
+}
+
 .flex-spacer {
   width: 100%;
 }

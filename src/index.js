@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 import axios from "axios";
 
 import Charts from "./components/Charts";
 import Navbar from "./components/Navbar";
+import Coins from './components/Coins';
 import useLocalStorage from './hooks/useLocalStorage';
 
 import "./styles.scss";
@@ -23,10 +25,14 @@ const App = () => {
   return (
     <div className="App">
       <Navbar strokeColor={strokeColor} setStrokeColor={setStrokeColor}/>
-      <Charts coinData={coinData} strokeColor={strokeColor}/>
+      <Route exact path='/' render={props => {
+        return <Charts {...props} coinData={coinData} strokeColor={strokeColor} />
+      }} />
+      <Route path='/coins' component={Coins} />
+      
     </div>
   );
 };
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(<Router><App /></Router>, rootElement);
