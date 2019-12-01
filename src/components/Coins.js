@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Chart from './Chart';
 
 const Coins =() => {
     const [coinList, setCoinList] = useState([]);
-    const [coinChoice, setCoinChoice] = useState('01coin');
+    const [coinChoice, setCoinChoice] = useState('bitcoin');
     const [coinInfo, setCoinInfo] = useState({});
 
     useEffect(() => {
@@ -16,9 +17,9 @@ const Coins =() => {
     }, []);
 
     useEffect(() => {
-        axios.get(`https://api.coingecko.com/api/v3/coins/${coinChoice}?localization=false&tickers=false&market_data=false&sparkline=true`)
+        axios.get(`https://api.coingecko.com/api/v3/coins/${coinChoice}?localization=false&tickers=false&market_data=true&sparkline=true`)
             .then(response => {
-                console.log(response);
+                console.log(response.data);
                 setCoinInfo(response.data);
             })
             .catch(err => console.log(err));
@@ -47,9 +48,12 @@ const Coins =() => {
                 <button type='submit'>Submit</button>
             </form>
             <div>
-                <h2>All About {coinInfo.name}:</h2>
+                <h2>About {coinInfo.name}:</h2>
+                {coinInfo.image? <div className='imgContainer'><img className='coin__logo' src={coinInfo.image.large} alt='coin type' /></div> : null}
+                {coinInfo.links? <a href={coinInfo.links.homepage[0]}>{coinInfo.links.homepage[0]}</a> : null}
                 {coinInfo.description? <div><p>{coinInfo.description.en}</p></div> : null }
             </div>
+            {coinInfo.market_data? <Chart sparklineData={coinInfo.market_data.sparkline_7d.price} strokeColor={'#8884d8'} /> : null }
             
         </div>
     )

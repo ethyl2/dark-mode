@@ -165,9 +165,14 @@ img {
   width: 100%;
 }
 
+.imgContainer {
+  margin: 1rem;
+}
+
 a {
   text-decoration: none;
   font-size: 1.5rem;
+  color: #1EC392;
 }
 
 a:hover {
@@ -182,9 +187,13 @@ form {
   margin: 2rem auto;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 80%;
+}
+
+label, input, button {
+  margin: 1rem;
 }
 
 .flex-spacer {
