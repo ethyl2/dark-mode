@@ -32,6 +32,22 @@ const Coins =({ strokeColor}) => {
         console.log(e.target.coinType.value);
     }
 
+    const formatMoney = (amount, decimalCount = 2, decimal = ".", thousands = ",") => {
+        try {
+          decimalCount = Math.abs(decimalCount);
+          decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+      
+          const negativeSign = amount < 0 ? "-" : "";
+      
+          let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+          let j = (i.length > 3) ? i.length % 3 : 0;
+      
+          return negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+        } catch (e) {
+          console.log(e)
+        }
+      };
+
     return (
         
         <div>
@@ -51,7 +67,13 @@ const Coins =({ strokeColor}) => {
             <div>
                 <h2>About {coinInfo.name}:</h2>
                 {coinInfo.image? <div className='imgContainer'><img className='coin__logo' src={coinInfo.image.large} alt='coin type' /></div> : null}
-                {coinInfo.market_data? <h3>Today's Price: $ {coinInfo.market_data.current_price.usd} usd</h3> : null}
+                {coinInfo.market_data? <div><h3>Today's Price: $ {coinInfo.market_data.current_price.usd} usd</h3> 
+                    <p>Price Change in Last 24 Hours: $ {formatMoney(coinInfo.market_data.price_change_24h_in_currency.usd)}</p>
+                    <p>24h Low/ 24h High: $ {formatMoney(coinInfo.market_data.high_24h.usd)} / $ {formatMoney(coinInfo.market_data.low_24h.usd)} usd</p>
+                    <h3>Market Cap: $ {formatMoney(coinInfo.market_data.market_cap.usd)} usd</h3>
+                    
+                    </div>
+                    : null}
                 {coinInfo.links? <a href={coinInfo.links.homepage[0]}>{coinInfo.links.homepage[0]}</a> : null}
                 {coinInfo.description? <div><p>{coinInfo.description.en}</p></div> : null }
             </div>
