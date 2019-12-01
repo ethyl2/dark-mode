@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import Chart from './Chart';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const Coins =({ strokeColor}) => {
-    const [coinList, setCoinList] = useState([]);
-    const [coinChoice, setCoinChoice] = useState('bitcoin');
-    const [coinInfo, setCoinInfo] = useState({});
+    const [coinList, setCoinList] = useLocalStorage('coinList', []);
+    const [coinChoice, setCoinChoice] = useLocalStorage('coinChoice', 'bitcoin');
+    const [coinInfo, setCoinInfo] = useLocalStorage('coinInfo', {});
 
     useEffect(() => {
         axios.get('https://api.coingecko.com/api/v3/coins/list')
@@ -14,7 +15,7 @@ const Coins =({ strokeColor}) => {
                 setCoinList(response.data);
             })
             .catch(err => console.log(err));
-    }, []);
+    }, [coinList]);
 
     useEffect(() => {
         axios.get(`https://api.coingecko.com/api/v3/coins/${coinChoice}?localization=false&tickers=false&market_data=true&sparkline=true`)
@@ -50,6 +51,7 @@ const Coins =({ strokeColor}) => {
             <div>
                 <h2>About {coinInfo.name}:</h2>
                 {coinInfo.image? <div className='imgContainer'><img className='coin__logo' src={coinInfo.image.large} alt='coin type' /></div> : null}
+                {coinInfo.market_data? <h3>Today's Price: $ {coinInfo.market_data.current_price.usd} usd</h3> : null}
                 {coinInfo.links? <a href={coinInfo.links.homepage[0]}>{coinInfo.links.homepage[0]}</a> : null}
                 {coinInfo.description? <div><p>{coinInfo.description.en}</p></div> : null }
             </div>
