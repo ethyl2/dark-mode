@@ -28,7 +28,9 @@ const App = () => {
       <Route exact path='/' render={props => {
         return <Charts {...props} coinData={coinData} strokeColor={strokeColor} />
       }} />
-      <Route path='/coins' component={Coins} />
+      <Route path='/coins' render={ props => {
+        return <Coins {...props} strokeColor={strokeColor} />
+      }} />
       
     </div>
   );

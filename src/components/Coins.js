@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Chart from './Chart';
 
-const Coins =() => {
+const Coins =({ strokeColor}) => {
     const [coinList, setCoinList] = useState([]);
     const [coinChoice, setCoinChoice] = useState('bitcoin');
     const [coinInfo, setCoinInfo] = useState({});
@@ -53,7 +53,7 @@ const Coins =() => {
                 {coinInfo.links? <a href={coinInfo.links.homepage[0]}>{coinInfo.links.homepage[0]}</a> : null}
                 {coinInfo.description? <div><p>{coinInfo.description.en}</p></div> : null }
             </div>
-            {coinInfo.market_data? <Chart sparklineData={coinInfo.market_data.sparkline_7d.price} strokeColor={'#8884d8'} /> : null }
+            {coinInfo.market_data? <Chart sparklineData={coinInfo.market_data.sparkline_7d.price} strokeColor={strokeColor} /> : null }
             
         </div>
     )
