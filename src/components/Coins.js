@@ -15,7 +15,7 @@ const Coins =({ strokeColor}) => {
                 setCoinList(response.data);
             })
             .catch(err => console.log(err));
-    }, [coinList]);
+    }, [coinList, setCoinList]);
 
     useEffect(() => {
         axios.get(`https://api.coingecko.com/api/v3/coins/${coinChoice}?localization=false&tickers=false&market_data=true&sparkline=true`)
@@ -65,12 +65,13 @@ const Coins =({ strokeColor}) => {
                 <button type='submit'>Submit</button>
             </form>
             <div>
-                <h2>About {coinInfo.name}:</h2>
+                <h2>About {coinInfo.name}</h2>
                 {coinInfo.image? <div className='imgContainer'><img className='coin__logo' src={coinInfo.image.large} alt='coin type' /></div> : null}
-                {coinInfo.market_data? <div><h3>Today's Price: $ {coinInfo.market_data.current_price.usd} usd</h3> 
-                    <p>Price Change in Last 24 Hours: $ {formatMoney(coinInfo.market_data.price_change_24h_in_currency.usd)} usd</p>
-                    <p>24h Low / 24h High: $ {formatMoney(coinInfo.market_data.high_24h.usd)} / $ {formatMoney(coinInfo.market_data.low_24h.usd)} usd</p>
-                    <h3>Market Cap: $ {formatMoney(coinInfo.market_data.market_cap.usd)} usd</h3>
+                {coinInfo.market_data? <div><h3><span className='bold'>Today's Price:</span> ${coinInfo.market_data.current_price.usd} usd</h3> 
+                    <p><span className='bold'>Price Change in Last 24 Hours:</span> ${formatMoney(coinInfo.market_data.price_change_24h_in_currency.usd)} usd</p>
+                    <p><span className='bold'>24h Low / 24h High:</span> ${formatMoney(coinInfo.market_data.high_24h.usd)} / ${formatMoney(coinInfo.market_data.low_24h.usd)} usd</p>
+                    <p><span className='bold'>All Time High (ATH):</span> ${formatMoney(coinInfo.market_data.ath.usd)} usd</p>
+                    <h3><span className='bold'>Market Cap:</span> ${formatMoney(coinInfo.market_data.market_cap.usd)} usd</h3>
                     
                     </div>
                     : null}
