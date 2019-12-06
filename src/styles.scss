@@ -146,15 +146,60 @@ h1 {
 
 h2 {
   font-size: 1.8rem;
+  margin: 2rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin: 2rem;
+  color: #f68819;
 }
 
 h4 {
   font-size: 1.4rem;
 }
 
+p {
+  display: block;
+  font-size: 1.25rem;
+  line-height: 3rem;
+  width: 65%;
+  margin: 2rem auto;
+}
 img {
   height: auto;
   width: 100%;
+}
+
+.imgContainer {
+  margin: 1rem;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: #1EC392;
+}
+
+a:hover {
+  font-style: italic;
+}
+
+a.active {
+  font-weight: bold;
+}
+
+form {
+  margin: 2rem auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+
+label, input, button {
+  margin: 1rem;
 }
 
 .flex-spacer {
@@ -250,4 +295,8 @@ text-align: left;
     background-color: #1F2022;
     border: none;
   }
+}
+
+.bold {
+  font-weight: bold;
 }
